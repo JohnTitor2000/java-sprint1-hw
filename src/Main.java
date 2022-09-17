@@ -43,6 +43,7 @@ public class Main {
                     break;
                 }
                 stepTracker.setStepByMonth(month, day, steps);
+                System.out.println("Значение сохранено!");
             } else if (userInput == STATISTICS) {
                 int month;
                 while (true) {
@@ -60,7 +61,7 @@ public class Main {
                     System.out.println("Введите желаемую цель по количеству шагов в день:");
                     int steps = scanner.nextInt();
                     if (steps >= 0) {
-                        stepTracker.changeStepGoal(steps);
+                        stepTracker.setStepsGoal(steps);
                         System.out.println("Значение изменено!");
                         break;
                     } else {

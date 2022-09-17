@@ -2,8 +2,8 @@ import org.w3c.dom.ls.LSOutput;
 
 public class StepTracker {
     /**For the user, months are counted from one**/
-    MonthData[] monthToData;
-    int stepsGoal = 10000;
+    private final MonthData[] monthToData;
+    private int stepsGoal = 10000;
 
     public StepTracker() {
         monthToData = new MonthData[12];
@@ -16,24 +16,21 @@ public class StepTracker {
         monthToData[month - 1].setStepsByDay(day, steps);
     }
 
-    public void changeStepGoal(int steps) {
-        stepsGoal = steps;
+    public void setStepsGoal(int stepsGoal) {
+        this.stepsGoal = stepsGoal;
     }
 
     public String getStatisticByMonth(int month) {
-        String formedStatistics = "Количество пройденых шагов: \n" + monthToData[month - 1].getAllSteps();
-        formedStatistics += "\n Общее кол-во шагов за месяц: " + monthToData[month - 1].getSumOfSteps() + "\n";
-        formedStatistics += "Наибольшее кол-во шагов за месяц: " + monthToData[month - 1].getMaxSteps() + "\n";
-        formedStatistics += "Среднее значение за месяц: " + monthToData[month - 1].getAverageValue() + "\n";
-        formedStatistics += "Пройдено: " + monthToData[month - 1].getDistance() + "\n";
-        formedStatistics += "Кол-во сожженных килокалорий: " + monthToData[month - 1].getBurntCalories() + "\n";
-        formedStatistics += "Лучшая серия: " + monthToData[month - 1].getBetterSeries(stepsGoal) + ".";
+        String formattedStatistics = "Количество пройденых шагов: \n"
+                                      + monthToData[month - 1].getAllSteps()
+                                      + "\nОбщее кол-во шагов за месяц: " + monthToData[month - 1].getSumOfSteps() + "\n"
+                                      + "Наибольшее кол-во шагов за месяц: " + monthToData[month - 1].getMaxSteps() + "\n"
+                                      + "Среднее значение за месяц: " + monthToData[month - 1].getAverageValue() + "\n"
+                                      + "Пройдено: " + monthToData[month - 1].getDistance() + "\n"
+                                      + "Кол-во сожженных килокалорий: " + monthToData[month - 1].getBurntCalories() + "\n"
+                                      + "Лучшая серия: " + monthToData[month - 1].getBetterSeries(stepsGoal) + ".";
 
-        return formedStatistics;
+        return formattedStatistics;
 
     }
 }
-
-
-
-

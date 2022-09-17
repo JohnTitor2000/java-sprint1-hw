@@ -3,54 +3,48 @@ public class MonthData {
     private final int[] stepsPerDay;
     private double sumOfSteps;
     private int maxSteps;
-    Converter converter = new Converter();
+    private final Converter converter = new Converter();
 
     public MonthData() {
         stepsPerDay = new int[30];
     }
 
-    public int getStepsByDay(int day) {
-        return stepsPerDay[day-1];
-    }
+    public void setStepsByDay (int day, int steps) { stepsPerDay[day - 1] = steps; }
 
-    public void setStepsByDay (int day, int steps) {
-        stepsPerDay[day-1] = steps;
-        sumOfSteps += steps;
-        if (steps > maxSteps) {
-            maxSteps=steps;
-        }
-    }
-
-    public String getAllSteps() {
-       String formedSteps = "";
+    public double getSumOfSteps() {
+        sumOfSteps = 0;
         for (int i = 0; i < stepsPerDay.length; i++) {
-            if(i == 29) {
-                formedSteps += (i + 1) + " день: " + stepsPerDay[i]+ ".";
+            sumOfSteps += stepsPerDay[i];
+        }
+        return sumOfSteps;
+    }
+
+    public double getMaxSteps() {
+        maxSteps = 0;
+        for (int i = 0; i < stepsPerDay.length; i++) {
+            maxSteps = Math.max(maxSteps, stepsPerDay[i]);
+        }
+        return maxSteps;
+    }
+
+    public StringBuilder getAllSteps() {
+       StringBuilder formedSteps = new StringBuilder("");
+        for (int i = 0; i < stepsPerDay.length; i++) {
+            if (i == stepsPerDay.length - 1) {
+                formedSteps.append((i + 1) + " день: " + stepsPerDay[i]+ ".");
             } else {
-                formedSteps += (i + 1) + " день: " + stepsPerDay[i] + ", ";
+                formedSteps.append ((i + 1) + " день: " + stepsPerDay[i] + ", ");
             }
         }
         return formedSteps;
     }
 
-    public double getSumOfSteps() {
-        return sumOfSteps;
-    }
-    public int getMaxSteps() {
-        return maxSteps;
-    }
+    public double getAverageValue() { return sumOfSteps / 30; }
 
-    public double getAverageValue() {
-        double averageValue = sumOfSteps / 30;
-        return averageValue;
-    }
-
-    public double getDistance() {
-        return  converter.convertStepsToKM(sumOfSteps);
-    }
+    public double getDistance() { return  converter.convertStepsToKilometer(sumOfSteps); }
 
     public double getBurntCalories() {
-        return converter.convertStepsToKCAL(sumOfSteps);
+        return converter.convertStepsToKilocalories(sumOfSteps);
     }
 
     public int getBetterSeries(int stepGoal) {
@@ -71,7 +65,7 @@ public class MonthData {
     /* for test purporses */
     public void setRandomValueForAllDay() {
         for (int i = 1; i < stepsPerDay.length+1; i++) {
-            setStepsByDay (i,((int)( Math.random() * 100000)+1));
+            setStepsByDay(i, ((int)( Math.random() * 100000)+1));
         }
     }
 
