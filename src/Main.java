@@ -2,15 +2,16 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        final int SET_STEPS = 1;
+        final int STATISTICS = 2;
+        final int SET_GOAL = 3;
+        final int TERMINATION = 4;
         Scanner scanner = new Scanner(System.in);
         StepTracker stepTracker = new StepTracker();
         printMenu();
         int userInput = scanner.nextInt();
-        if (userInput > 4 || userInput < 1) {
-            System.out.println("Данной команды не существует, попробуйте снова.");
-        }
-        while (userInput != 4) {
-            if (userInput == 1) {
+        while (userInput != TERMINATION) {
+            if (userInput == SET_STEPS) {
                 int month;
                 while (true) {
                     System.out.println("За какой месяц хотите ввести колличество шагов?");
@@ -41,8 +42,8 @@ public class Main {
                     }
                     break;
                 }
-                stepTracker.setStepByMonth(month,day,steps);
-            } else if (userInput == 2) {
+                stepTracker.setStepByMonth(month, day, steps);
+            } else if (userInput == STATISTICS) {
                 int month;
                 while (true) {
                     System.out.println("Введите месяц по которому хотите получить статистику:");
@@ -51,15 +52,16 @@ public class Main {
                         System.out.println("Выберите месяц от 1 до 12.");
                         continue;
                     }
-                    stepTracker.getStatisticByMonth(month);
+                    System.out.println(stepTracker.getStatisticByMonth(month));
                     break;
                 }
-            } else if (userInput == 3) {
+            } else if (userInput == SET_GOAL) {
                 while (true) {
                     System.out.println("Введите желаемую цель по количеству шагов в день:");
                     int steps = scanner.nextInt();
                     if (steps >= 0) {
                         stepTracker.changeStepGoal(steps);
+                        System.out.println("Значение изменено!");
                         break;
                     } else {
                         System.out.println("Введенное значение не может быть отрицательным!\nВведите положительное значение.\n");
@@ -68,7 +70,7 @@ public class Main {
             }
             printMenu();
             userInput = scanner.nextInt();
-            if (userInput > 4 || userInput < 1) {
+            if (userInput > TERMINATION || userInput < SET_STEPS) {
                 System.out.println("Данной команды не существует, попробуйте снова.");
             }
         }
