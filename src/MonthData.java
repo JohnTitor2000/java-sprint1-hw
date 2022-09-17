@@ -1,18 +1,19 @@
 public class MonthData {
 
     private final int[] stepsPerDay;
-    private double sumOfSteps;
-    private int maxSteps;
-    private final Converter converter = new Converter();
+    private final Converter converter;
 
     public MonthData() {
         stepsPerDay = new int[30];
+        converter = new Converter();
     }
 
-    public void setStepsByDay (int day, int steps) { stepsPerDay[day - 1] = steps; }
+    public void setStepsByDay(int day, int steps) {
+        stepsPerDay[day - 1] = steps;
+    }
 
     public double getSumOfSteps() {
-        sumOfSteps = 0;
+        double sumOfSteps = 0;
         for (int i = 0; i < stepsPerDay.length; i++) {
             sumOfSteps += stepsPerDay[i];
         }
@@ -20,15 +21,15 @@ public class MonthData {
     }
 
     public double getMaxSteps() {
-        maxSteps = 0;
+        int maxSteps = 0;
         for (int i = 0; i < stepsPerDay.length; i++) {
             maxSteps = Math.max(maxSteps, stepsPerDay[i]);
         }
         return maxSteps;
     }
 
-    public StringBuilder getAllSteps() {
-       StringBuilder formedSteps = new StringBuilder("");
+    public String getAllSteps() {
+       StringBuilder formedSteps = new StringBuilder();
         for (int i = 0; i < stepsPerDay.length; i++) {
             if (i == stepsPerDay.length - 1) {
                 formedSteps.append((i + 1) + " день: " + stepsPerDay[i]+ ".");
@@ -36,27 +37,29 @@ public class MonthData {
                 formedSteps.append ((i + 1) + " день: " + stepsPerDay[i] + ", ");
             }
         }
-        return formedSteps;
+        return formedSteps.toString();
     }
 
-    public double getAverageValue() { return sumOfSteps / 30; }
+    public double getAverageValue() {
+        return getSumOfSteps() / 30;
+    }
 
-    public double getDistance() { return  converter.convertStepsToKilometer(sumOfSteps); }
+    public double getDistance() {
+        return  converter.convertStepsToKilometer(getSumOfSteps());
+    }
 
     public double getBurntCalories() {
-        return converter.convertStepsToKilocalories(sumOfSteps);
+        return converter.convertStepsToKilocalories(getSumOfSteps());
     }
 
     public int getBetterSeries(int stepGoal) {
-        int series =0;
+        int series =    0;
         int maxSeries = 0;
         for (int i = 0; i < stepsPerDay.length; i++) {
             if(stepsPerDay[i] >= stepGoal) {
                 series++;
-            } else {
-                if (series > maxSeries) {
-                    maxSeries = series;
-                }
+            } else if (series > maxSeries) {
+                maxSeries = series;
             }
         }
         return maxSeries;

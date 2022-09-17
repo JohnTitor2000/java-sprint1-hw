@@ -1,17 +1,18 @@
 import java.util.Scanner;
 
 public class Main {
+    private static final int SET_STEPS_ACTION = 1;
+    private static final int SHOW_STATISTICS_ACTION = 2;
+    private static final int SET_GOAL_ACTION = 3;
+    private static final int TERMINATION_PROGRAM_ACTION = 4;
+
     public static void main(String[] args) {
-        final int SET_STEPS = 1;
-        final int STATISTICS = 2;
-        final int SET_GOAL = 3;
-        final int TERMINATION = 4;
         Scanner scanner = new Scanner(System.in);
         StepTracker stepTracker = new StepTracker();
         printMenu();
         int userInput = scanner.nextInt();
-        while (userInput != TERMINATION) {
-            if (userInput == SET_STEPS) {
+        while (userInput != TERMINATION_PROGRAM_ACTION) {
+            if (userInput == SET_STEPS_ACTION) {
                 int month;
                 while (true) {
                     System.out.println("За какой месяц хотите ввести колличество шагов?");
@@ -44,7 +45,7 @@ public class Main {
                 }
                 stepTracker.setStepByMonth(month, day, steps);
                 System.out.println("Значение сохранено!");
-            } else if (userInput == STATISTICS) {
+            } else if (userInput == SHOW_STATISTICS_ACTION) {
                 int month;
                 while (true) {
                     System.out.println("Введите месяц по которому хотите получить статистику:");
@@ -56,7 +57,7 @@ public class Main {
                     System.out.println(stepTracker.getStatisticByMonth(month));
                     break;
                 }
-            } else if (userInput == SET_GOAL) {
+            } else if (userInput == SET_GOAL_ACTION) {
                 while (true) {
                     System.out.println("Введите желаемую цель по количеству шагов в день:");
                     int steps = scanner.nextInt();
@@ -68,15 +69,13 @@ public class Main {
                         System.out.println("Введенное значение не может быть отрицательным!\nВведите положительное значение.\n");
                     }
                 }
+            } else {
+                System.out.println("Данной команды не существует, попробуйте снова.");
             }
             printMenu();
             userInput = scanner.nextInt();
-            if (userInput > TERMINATION || userInput < SET_STEPS) {
-                System.out.println("Данной команды не существует, попробуйте снова.");
-            }
         }
-        System.out.println("Завершение програмы.");
-
+        System.out.println("Завершение программы.");
     }
 
     private static void printMenu() {
@@ -85,8 +84,5 @@ public class Main {
                                "2. Напечатать статистику за определённый месяц; \n" +
                                "3. Изменить цель по количеству шагов в день; \n" +
                                "4. Выйти из приложения.");
-
-
     }
-
 }

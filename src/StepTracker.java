@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 public class StepTracker {
     /**For the user, months are counted from one**/
     private final MonthData[] monthToData;
@@ -22,8 +20,8 @@ public class StepTracker {
 
     public String getStatisticByMonth(int month) {
         String formattedStatistics = "Количество пройденых шагов: \n"
-                                      + monthToData[month - 1].getAllSteps()
-                                      + "\nОбщее кол-во шагов за месяц: " + monthToData[month - 1].getSumOfSteps() + "\n"
+                                      + monthToData[month - 1].getAllSteps() + "\n"
+                                      + "Общее кол-во шагов за месяц: " + monthToData[month - 1].getSumOfSteps() + "\n"
                                       + "Наибольшее кол-во шагов за месяц: " + monthToData[month - 1].getMaxSteps() + "\n"
                                       + "Среднее значение за месяц: " + monthToData[month - 1].getAverageValue() + "\n"
                                       + "Пройдено: " + monthToData[month - 1].getDistance() + "\n"
@@ -31,6 +29,5 @@ public class StepTracker {
                                       + "Лучшая серия: " + monthToData[month - 1].getBetterSeries(stepsGoal) + ".";
 
         return formattedStatistics;
-
     }
 }
