@@ -66,11 +66,10 @@ public class Main {
                     if (steps < 0) {
                         System.out.println("Введенное значение не может быть отрицательным!\nВведите положительное значение.\n");
                         continue;
-                    } else {
-                        stepTracker.setStepsGoal(steps);
-                        System.out.println("Значение изменено!");
-                        break;
                     }
+                    stepTracker.setStepsGoal(steps);
+                    System.out.println("Значение изменено!");
+                    break;
                 }
             } else {
                 System.out.println("Данной команды не существует, попробуйте снова.");

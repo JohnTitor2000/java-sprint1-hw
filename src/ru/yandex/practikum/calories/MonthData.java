@@ -60,8 +60,7 @@ public class MonthData {
         for (int i = 0; i < stepsPerDay.length; i++) {
             if (stepsPerDay[i] >= stepGoal) {
                 series++;
-            } else if (series > maxSeries) {
-                maxSeries = series;
+                maxSeries = Math.max(maxSeries,series);
             } else {
                 series = 0;
             }
