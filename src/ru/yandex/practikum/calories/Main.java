@@ -1,3 +1,5 @@
+package ru.yandex.practikum.calories;
+
 import java.util.Scanner;
 
 public class Main {
@@ -61,12 +63,13 @@ public class Main {
                 while (true) {
                     System.out.println("Введите желаемую цель по количеству шагов в день:");
                     int steps = scanner.nextInt();
-                    if (steps >= 0) {
+                    if (steps < 0) {
+                        System.out.println("Введенное значение не может быть отрицательным!\nВведите положительное значение.\n");
+                        continue;
+                    } else {
                         stepTracker.setStepsGoal(steps);
                         System.out.println("Значение изменено!");
                         break;
-                    } else {
-                        System.out.println("Введенное значение не может быть отрицательным!\nВведите положительное значение.\n");
                     }
                 }
             } else {

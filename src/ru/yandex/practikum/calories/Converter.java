@@ -1,3 +1,5 @@
+package ru.yandex.practikum.calories;
+
 public class Converter {
 
     private final static double ONE_STEP_IN_KILOMETER = 0.00075;

@@ -1,5 +1,7 @@
-public class MonthData {
+package ru.yandex.practikum.calories;
 
+public class MonthData {
+    private final static double NUMBER_OF_DAYS = 30;
     private final int[] stepsPerDay;
     private final Converter converter;
 
@@ -41,7 +43,7 @@ public class MonthData {
     }
 
     public double getAverageValue() {
-        return getSumOfSteps() / 30;
+        return getSumOfSteps() / NUMBER_OF_DAYS;
     }
 
     public double getDistance() {
@@ -52,14 +54,16 @@ public class MonthData {
         return converter.convertStepsToKilocalories(getSumOfSteps());
     }
 
-    public int getBetterSeries(int stepGoal) {
-        int series =    0;
+    public int getBestSeries(int stepGoal) {
+        int series = 0;
         int maxSeries = 0;
         for (int i = 0; i < stepsPerDay.length; i++) {
-            if(stepsPerDay[i] >= stepGoal) {
+            if (stepsPerDay[i] >= stepGoal) {
                 series++;
             } else if (series > maxSeries) {
                 maxSeries = series;
+            } else {
+                series = 0;
             }
         }
         return maxSeries;
